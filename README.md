@@ -13,6 +13,8 @@ It is recommended to configure the environment in the root directory of this rep
 ## Environment Setup
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -24,7 +26,6 @@ pip install -r requirements.txt
   - `ICSDClient.py`: Client wrapping the ICSD Web Service.
     - Supports login, search, and batch download of CIFs.
     - Example included: **Download all crystalline CIFs containing S / Se / Te**.
-  - `requirements.txt`: ICSD client dependencies (integrated into root `requirements.txt`).
 
 - `MP/`
   - `download_mp_cifs.py`: Batch download CIFs from **Materials Project**.
@@ -37,7 +38,6 @@ pip install -r requirements.txt
       - **Material contains at least one of S / Se / Te**;
       - And **energy above hull > 0.5 eV/atom**;
       - Results written to the specified directory; existing files can be skipped.
-  - `requirements.txt`: MP-specific dependencies (now managed by root `requirements.txt`).
 
 - `OQMD/`
   - `download_oqmd_cifs.py`: Batch download CIFs from **OQMD**.
@@ -49,7 +49,6 @@ pip install -r requirements.txt
     - Default behavior (no query arguments):
       - **Contains at least one of S / Se / Te** (`element_set=(S-Se-Te)`);
       - And **stability > 0.5 eV/atom** (i.e., 0.5 eV/atom above the convex hull).
-  - `requirements.txt`: OQMD-specific dependencies (integrated into root `requirements.txt`).
 
 - `requirements.txt` (root)
   - Consolidates dependencies for **ICSD + MP + OQMD**:
@@ -57,29 +56,13 @@ pip install -r requirements.txt
 
 ---
 
-## Common Usage Examples
-
-> Commands below assume you are in the repository root with the virtual environment activated:  
-> `cd d:\Databases_CIFs_download\DataBases_Cif_download` and `.\.venv\Scripts\Activate.ps1`
-
 ### 1. Download CIFs from Materials Project
 
 - Default: material contains at least one of S / Se / Te and energy above hull > 0.5:
 
 ```powershell
-python MP\download_mp_cifs.py -o .\mp_cifs
-```
-
-- Custom energy above hull lower bound, e.g. > 0.8 eV/atom:
-
-```powershell
-python MP\download_mp_cifs.py --eabove-hull 0.8 -o .\mp_cifs
-```
-
-- Download by specified `material_id` list:
-
-```powershell
-python MP\download_mp_cifs.py --ids mp-149 mp-1234 -o .\mp_cifs
+cd MP
+python3 download_mp_cifs.py
 ```
 
 ### 2. Download CIFs from OQMD
@@ -87,13 +70,8 @@ python MP\download_mp_cifs.py --ids mp-149 mp-1234 -o .\mp_cifs
 - Default: at least one of S / Se / Te and stability > 0.5 eV/atom:
 
 ```powershell
-python OQMD\download_oqmd_cifs.py -o .\oqmd_cifs
-```
-
-- Download by entry_id list:
-
-```powershell
-python OQMD\download_oqmd_cifs.py --ids 1216058 16974 -o .\oqmd_cifs
+cd OQMD
+python3 download_oqmd_cifs.py
 ```
 
 ### 3. Using the ICSD Client
@@ -102,7 +80,7 @@ Run the example `main()` in the `ICSD` directory or call methods in `ICSDClient`
 
 ```powershell
 cd ICSD
-python ICSDClient.py
+python3 ICSDClient.py
 ```
 
 Fill in your own ICSD account and password in the script, and adjust filter conditions and output directory as needed.
