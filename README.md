@@ -24,7 +24,7 @@ pip install -r requirements.txt
 - Default: material contains at least one of S / Se / Te and energy above hull > 0.5:
 
 ```powershell
-cd MP
+cd Material_Project
 python3 download_mp_cifs.py
 ```
 
