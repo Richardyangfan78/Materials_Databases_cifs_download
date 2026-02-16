@@ -1,0 +1,12 @@
+# ---------- ICSD (ICSDClient.py) ----------
+requests>=2.23.0
+beautifulsoup4>=4.0
+lxml>=4.0
+pandas>=1.0
+numpy>=1.0
+
+# ---------- MP (download_mp_cifs.py) ----------
+mp-api>=0.34.0
+
+# ---------- OQMD (download_oqmd_cifs.py) ----------
+# OQMD uses requests + pymatgen, both of which are satisfied by the dependencies mentioned above.
